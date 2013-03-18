@@ -5,6 +5,7 @@ Fbapp::Application.routes.draw do
   match 'oauth/redirect' => 'oauth#redirect', :as => :oauth_redirect
   match 'oauth/home' => 'oauth#home', :as => :oauth_home
   match 'oauth/index' => 'oauth#index', :as => :oauth_index
+  match 'oauth/friend/:id' => 'oauth#friend'
   match 'oauth/logout' => 'oauth#logout'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

@@ -2,10 +2,10 @@
 	<% if @likes %>
 		<% for like in @likes %>
 			<tr>
-				<td><b><%=h like["name"]%> </b></td>
+				<td><b><%= like["name"]%> </b></td>
 			</tr>
 			<tr>
-				<td><%=h like["category"] %></td>
+				<td><%= like["category"] %></td>
 			</tr>
 			<tr>
 				<td>&ndash;</td>

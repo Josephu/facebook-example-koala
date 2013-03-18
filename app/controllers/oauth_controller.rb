@@ -1,18 +1,19 @@
+# https://github.com/arsduo/koala/wiki/Graph-API
 class OauthController < ApplicationController
+	before_filter :parse_facebook_cookies, :except => [:login,:logout]
 	def login
-		render :layout => "layouts/login"
+	end
+
+	def friend
+		@friend = @graph.get_object(params[:id])
 	end
 
 	def home
-		@user_graph = Koala::Facebook::API.new(session[:access_token])
-		pages = @user_graph.get_connections('me', 'friends')
-		binding.pry
+		@friends = @graph.get_connections('me', 'friends')
 	end
 
 	def index
-		parse_facebook_cookies
-		graph = Koala::Facebook::GraphAPI.new(@facebook_cookies["access_token"])
-		@likes = graph.get_connections("me", "likes")
+		@likes = @graph.get_connections("me", "likes")
 	end
 
 	def logout
@@ -20,9 +21,13 @@ class OauthController < ApplicationController
 		redirect_to oauth_login_path
 	end
 
-	#before_filter :parse_facebook_cookies
+private
 	def parse_facebook_cookies
-		@facebook_cookies = Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
-		session["access_token"] = @facebook_cookies["access_token"]
+		# Check if first time login
+		if session["access_token"] == nil
+			facebook_cookies = Koala::Facebook::OAuth.new.get_user_info_from_cookie(cookies)
+			session["access_token"] = facebook_cookies["access_token"]
+		end
+		@graph = Koala::Facebook::API.new(session[:access_token])
 	end
 end

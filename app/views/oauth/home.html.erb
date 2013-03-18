@@ -1,0 +1,15 @@
+<table border="0">
+	<% if @friends %>
+		<% for friend in @friends %>
+			<tr>
+				<td><b><%= friend["name"]%> </b></td>
+			</tr>
+			<tr>
+				<td><%= friend["id"] %></td>
+			</tr>
+			<tr>
+				<td>&ndash;</td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>

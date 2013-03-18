@@ -1,0 +1,9 @@
+<table border="0">
+	<% if @friend %>
+		<% @friend.each do |k,v| %>
+			<tr>
+				<td><b><%= k %> </b></td><td><%= v %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
