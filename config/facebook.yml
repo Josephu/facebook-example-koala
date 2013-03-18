@@ -1,0 +1,5 @@
+# config/facebook.yml
+development:
+ app_id: 	 
+ secret_key:  
+ callback_url: http://localhost:3000/oauth/redirect # change to your host url
